@@ -1,0 +1,36 @@
+DEBUG=yes
+CC=gcc
+ifeq ($(DEBUG),yes)
+	CFLAGS=-W -Wall -ansi -pedantic -g
+	LDFLAGS=
+else
+	CFLAGS=-W -Wall -ansi -pedantic
+	LDFLAGS=
+endif
+EXEC=hello
+SRC= $(wildcard *.c)
+OBJ= $(SRC:.c=.o)
+
+all: $(EXEC)
+ifeq ($(DEBUG),yes)
+	echo "Génération en mode debug"
+else
+	echo "Génération en mode release"
+endif
+
+hello: $(OBJ)
+	$(CC) -o $@ $^ $(LDFLAGS)
+
+main.o: hello.h
+
+%.o: %.c
+	$(CC) -o $@ -c $< $(CFLAGS)
+
+.PHONY: clean mrproper
+
+clean:
+	rm -rf *.o
+
+mrproper: clean
+	rm -rf $(EXEC)
+			
