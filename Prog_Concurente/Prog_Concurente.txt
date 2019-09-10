@@ -1,0 +1,87 @@
+
+Le mécanisqme de la programmation concurrente permet à des processus de partager des znes de données physiques/voir structurées. Ces processus ce partage une ressource, la ressource critique.
+L'avantage de ce type de communication par rapport aux de messages est qu'il n'entraine aucune recopie de données. Ce qui le rend plus performant.
+
+	|  |				|  |
+	|P1| -> Resource <- |P2|
+	|  |				|  |
+
+Ressource critique : Ressource utilisée par plusieurs processus.
+
+Dans un programme exécutable, les adresses qu'il contient sont "virtuelles". Pour les passers en mémoire, une translation est effectué pour les mettres sur des adresses physiques. Ce processus est géré par le module de gestion de la mémoire.
+
+La mémoire physique est organisée en page(unité de mémoire allouable), de taille variable en fonction de la machine. 
+L'espace virtuelle est découpé en pages logiques.
+Une table de pages contient toutes les informations relatives aux pages logiques. C'est grâce à cette table que l'association des adresses virtuelles et physiques est fait.
+
+		|		|
+		| TEXTE |
+		|_______|
+		|DONNEES|
+		|_______|
+		|///////|
+		|///////| Adresses virtuelles
+		|///////|  non utilisées
+		|_______|
+		| PILE  |
+		|		|
+
+Un espace d'adressage virutel (voir schéma ci dessus) peut être manipulé par sont BREAKPOINT qui est l'adresse vituelle la plus proche située hors de la zone de données.
+En principe toute adresse située au delà de ce point est incorrect.
+
+On peut donc manipuler ce point de rupture en le déplaçant. Il existe 2 solutions pour le faire.
+
+							============================================ 	
+ 	En passant la futur position de point:
+ 		int brk(void *p_brk); /*Nouvelle valeur du breakpoint*/
+
+ 	En donnant une valeur d'incrémentation:
+ 		void *sbrk(intptr_t inc); /*Déplacement du breakpoint*/
+
+							============================================
+
+Pour qu'une ressource soit partagée entre plusieurs processus, on effectue une projection de cette ressource dans chaques processus.
+Les ressources critiques sont stockées dans la table IPC.
+
+		|		  |CU|CS|
+		| MESSAGE |  |  |
+		|		  |  |  |     CU: Clé_Utilisateur
+		|_________|  |  |     CS: Clé_Système
+		|   SMP   |  |  |
+		|		  |  |  |
+		|		  |  |  |     SMP: Segment_Mémoire_Partagé
+		|_________|  |  |
+		|SEMAPHORE|  |  |
+		|		  |  |  |
+		|		  |  |  |
+
+							============================================
+							Commande pour la table IPC
+								ipcs /*Affiche la table IPC*/
+								ipcrm -M "CU" /*supprime la ressource*/
+							============================================
+
+On peut identifier un segment grâce à:
+ 	int shmget(key_t cle_segement, size_t taille_segment, int option);
+
+							============================================
+
+ Et effectuer des opération dessus:
+ 	Le processus de déplacement de BREAKPOINT est appelé "l'attachement". L'opéreation inverse, qui consiste à remettre le BREAKPOINT à sa position d'origine quand le processus n'utilise plus le segment est le "Détachement".
+
+							============================================
+ 		L'attachement:
+ 			void *shmat(int shmid, const void *adr, int option);
+
+ 			On utilisera généralement option=0 et adr=NULL.
+
+ 		Le détachement:
+ 			int shmdt(char *adr);
+							============================================
+
+ La gestion des segment s'effectue par:
+ 	int shmctl(int shmid, int opération, struct shmid_ds *param);
+
+ 		Les opérations possible sont: IPC_STAT, IPC_SET, IPC_RMID.
+							============================================
+

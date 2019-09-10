@@ -1,0 +1,31 @@
+http://umtice.univ-lemans.fr/course/view.php?id=1227
+Clef:20IARK
+
+Objectif:	Représenter les informations disponibles dans un formalisme adéquat
+			Formaliser des raisonnements à partir de ces informations
+			Approche symbolique
+
+Trois questionnements sur l'IA:
+	Compréhension des processus de raisonnement humain
+	Possibilité de concevoir des machineayant un comportement intelligent
+	Composante artistique de la "créature"
+
+IA n'est pas que de l'informatique, ça regroupe, les maths, l'informatique, la mécanique mais aussi la littérature, la philo, la psycho ...
+
+IA tourne autour de la cybernétique, les automates, les réseaux de neurones ...
+
+1956: Première conférences réunissant Turing, Rosenblalt... où apparait pour la première fois le mot "Intelligence Artificielle"
+
+	Approche "modèle"/Symbolique -> Programmation déclarative
+	Approche combinatoire
+	Approche numériques
+
+Envisager des applications complexes réelles plutôt que d'étudier des petits problèmes abstraits et formalisés.
+
+Deux type d'IA:
+	IA Faible: machine qui font ce qu'on veut qu'elles fassent (on veut que ça marche)
+	IA Forte: Comprehension et reproduction de l'humain à travers la machine (on veut que sa marche mais on cherche à comprendre comment ça marche)
+
+Il existe différentes solution en IA 
+
+IA = dev de programme présentant un comportement
