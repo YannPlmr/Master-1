@@ -1,6 +1,6 @@
 
-Le mécanisqme de la programmation concurrente permet à des processus de partager des znes de données physiques/voir structurées. Ces processus ce partage une ressource, la ressource critique.
-L'avantage de ce type de communication par rapport aux de messages est qu'il n'entraine aucune recopie de données. Ce qui le rend plus performant.
+Le mécanisqme de la programmation concurrente permet à des processus de partager des zones de données physiques/voir structurées. Ces processus ce partage une ressource, la ressource critique.
+L'avantage de ce type de communication par rapport aux files de messages est qu'il n'entraine aucune recopie de données. Ce qui le rend plus performant.
 
 	|  |				|  |
 	|P1| -> Resource <- |P2|
@@ -11,7 +11,7 @@ Ressource critique : Ressource utilisée par plusieurs processus.
 Dans un programme exécutable, les adresses qu'il contient sont "virtuelles". Pour les passers en mémoire, une translation est effectué pour les mettres sur des adresses physiques. Ce processus est géré par le module de gestion de la mémoire.
 
 La mémoire physique est organisée en page(unité de mémoire allouable), de taille variable en fonction de la machine. 
-L'espace virtuelle est découpé en pages logiques.
+L'espace virtuel est découpé en pages logiques.
 Une table de pages contient toutes les informations relatives aux pages logiques. C'est grâce à cette table que l'association des adresses virtuelles et physiques est fait.
 
 		|		|

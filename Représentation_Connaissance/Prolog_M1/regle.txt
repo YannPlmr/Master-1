@@ -1,0 +1,69 @@
+%# Autres Prédicats propre aux jeux.
+
+%#TicTacToe
+
+    toutesLesCasesDepart([[a,1],[a,2],[a,3],[b,1],[b,2],[b,3],[c,1],[c,2],[c,3]]).
+
+    grilleDeDepart([[-,-,-],[-,-,-],[-,-,-]]).
+
+    %# Predicat : succNum/2
+    succNum(1,2).
+    succNum(2,3).
+
+    %# Predicat : succAlpha/2
+    succAlpha(a,b).
+    succAlpha(b,c).
+
+
+    %# Predicat : ligneFaite/2
+    %#
+    %# version bof
+    %# ligneFaiteBof(x,[x,x,x]).
+    %# ligneFaiteBof(o,[o,o,o]).
+    %# ligneFaiteBof(-,[-,-,-]).
+    ligneFaite(Val, [Val]).
+    ligneFaite(Val, [Val|R]) :- ligneFaite(Val, R).
+
+
+    %# Predicat : ligneExiste/3
+    %# ?- ligneExiste(x,[[x,-,x],[x,x,x],[-,o,-]],V).
+    %# V = 2 ;
+
+    ligneExiste(Val, [L1|_], 1) :- ligneFaite(Val, L1).
+    ligneExiste(Val, [_|R], NumLigne) :- succNum(I,NumLigne), ligneExiste(Val, R, I).
+
+
+    %# Predicat : colonneExiste/3
+    colonneExiste(Val, [[Val|_],[Val|_],[Val|_]], a).
+    colonneExiste(Val, [[_|R1],[_|R2],[_|R3]], NomCol) :-
+    	succAlpha(I,NomCol),
+    	colonneExiste(Val, [R1,R2,R3], I).
+
+
+    %# Predicats diagonaleDG/2 et diagonaleGD/2
+    diagonaleGD(Val, [[Val,_,_],[_,Val,_],[_,_,Val]]).
+    diagonaleDG(Val, [[_,_,Val],[_,Val,_],[Val,_,_]]).
+
+
+    %# Predicat partieGagnee/2
+    partieGagnee(Val, G) :- ligneExiste(Val, G, _).
+    partieGagnee(Val, G) :- colonneExiste(Val, G, _).
+    partieGagnee(Val, G) :- diagonaleGD(Val, G).
+    partieGagnee(Val, G) :- diagonaleDG(Val, G).
+
+
+%#Kono
+
+    toutesLesCasesDepart([[a,1],[a,2],[a,3],[a,4],[b,1],[b,2],[b,3],[b,4],[c,1],[c,2],[c,3],[c,4],[d,1],[d,2],[d,3],[d,4]]).
+
+    grilleDeDepart([[x,x,x,x],[x,x,x,x],[o,o,o,o],[o,o,o,o]]).
+
+    %# Predicat : succNum/2
+    succNum(1,2).
+    succNum(2,3).
+    succNum(3,4).
+    
+    %# Predicat : succAlpha/2
+    succAlpha(a,b).
+    succAlpha(b,c).
+    succAlpha(c,d).
