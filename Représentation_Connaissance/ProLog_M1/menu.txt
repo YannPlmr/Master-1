@@ -1,0 +1,24 @@
+Menu simple avec des crudités en entrée ?
+-- menusimple(E,P,D), entree(crudites).
+
+Menu simple avec une mousse au chocolat en dessert ?
+-- menusimple(E,P,D), dessert(mouse au chocolat).
+
+Menu smple avec du poisson comme plat ?
+-- menusimple(E,P,D), plat(poisson).
+
+Menu simple avec du melon en entrée en du poisson en plat ?
+-- menusimple(E,P,D), entree(melon),  poisson(P).
+
+? menusimple(E,P,D),!.
+E = crudites,
+P = steack,
+D = sorbet.
+
+? menusimple(E,P,D), poisson(P), !.
+E = crudites,
+P = bar,
+D = sorbet.
+
+? menusimple(E,P,D), !, poisson(P).
+false.
